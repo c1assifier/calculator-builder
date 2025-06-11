@@ -1,8 +1,8 @@
-export type BlockType = "display" | "keyboard" | "operators" | "equalReset";
+export type BlockType = "Display" | "Keyboard" | "Operators" | "EqualReset";
 
 export const BLOCK_ORDER: BlockType[] = [
-  "display",
-  "keyboard",
-  "operators",
-  "equalReset",
-];
+  "Display",
+  "Keyboard",
+  "Operators",
+  "EqualReset",
+] as const;
