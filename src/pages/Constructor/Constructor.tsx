@@ -3,7 +3,7 @@ import { DraggableBlock } from "@/app/dnd/DraggableBlock";
 import { DroppableCanvas } from "@/app/dnd/DroppableCanvas";
 import { useCalculatorStore } from "@/store/calculatorStore";
 import { useModeStore } from "@/store/modeStore";
-import { BLOCK_ORDER } from "@/types/block";
+import { BLOCK_ORDER, type BlockType } from "@/types/block";
 import * as Blocks from "@/components/CalculatorBlocks";
 import styles from "./Constructor.module.css";
 import clsx from "clsx";
@@ -36,7 +36,7 @@ export const Constructor = () => {
       <DndContext
         onDragEnd={({ over, active }) => {
           if (over?.id === "canvas") {
-            addBlock(active.id as any);
+            addBlock(active.id as BlockType);
           }
         }}
       >
