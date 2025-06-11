@@ -59,7 +59,13 @@ export const Constructor = () => {
 
       <DndContext onDragEnd={handleDragEnd}>
         <div className={styles.grid}>
-          <div className={styles.panel}>
+          {/* Левая панель — блоки */}
+          <div
+            className={clsx(
+              styles.panel,
+              mode === "runtime" && styles.disabled,
+            )}
+          >
             {availableBlocks.map((type) => {
               const Block = Blocks[type as keyof typeof Blocks];
               return (
@@ -70,6 +76,7 @@ export const Constructor = () => {
             })}
           </div>
 
+          {/* Правая часть — canvas */}
           <div className={styles.canvas}>
             {mode === "constructor" ? (
               <DroppableCanvas />
