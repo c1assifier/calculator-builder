@@ -1,0 +1,20 @@
+.btn {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #f0f0f0;
+}
+
+.btn:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: not-allowed;
+}
