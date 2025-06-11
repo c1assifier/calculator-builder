@@ -1,29 +1,26 @@
 import { useDroppable } from "@dnd-kit/core";
-import styles from "./DroppableCanvas.module.css";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { useCalculatorStore } from "@/store/calculatorStore";
-import * as Blocks from "@/components/CalculatorBlocks";
-import type { BlockType } from "@/types/block";
+import { SortableBlock } from "./SortableBlock";
+import styles from "./DroppableCanvas.module.css";
 
 export const DroppableCanvas = () => {
   const { setNodeRef } = useDroppable({ id: "canvas" });
-  const { canvasBlocks, removeBlock } = useCalculatorStore();
-
-  const renderBlock = (type: string) => {
-    const Block = Blocks[type as keyof typeof Blocks];
-    return (
-      <div
-        key={type}
-        onDoubleClick={() => removeBlock(type as BlockType)}
-        style={{ marginBottom: 12 }}
-      >
-        <Block />
-      </div>
-    );
-  };
+  const { canvasBlocks } = useCalculatorStore();
 
   return (
     <div ref={setNodeRef} className={styles.droppable}>
-      {canvasBlocks.map(renderBlock)}
+      <SortableContext
+        items={canvasBlocks.map((b) => b.id)}
+        strategy={verticalListSortingStrategy}
+      >
+        {canvasBlocks.map(({ id, type }) => (
+          <SortableBlock key={id} id={id} type={type} />
+        ))}
+      </SortableContext>
     </div>
   );
 };
