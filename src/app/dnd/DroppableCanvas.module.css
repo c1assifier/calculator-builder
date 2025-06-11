@@ -1,0 +1,7 @@
+.droppable {
+  min-height: 400px;
+  border: 2px dashed #bbb;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #fafafa;
+}

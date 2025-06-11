@@ -1,4 +1,4 @@
-export * from "./Display";
-export * from "./Keyboard";
-export * from "./Operators";
-export * from "./EqualReset";
+export { Display } from "./Display";
+export { Keyboard } from "./Keyboard";
+export { Operators } from "./Operators";
+export { EqualReset } from "./EqualReset";
