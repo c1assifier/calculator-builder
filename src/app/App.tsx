@@ -1,5 +1,7 @@
+import { Constructor } from "@/pages/Constructor";
+
 function App() {
-  return <></>;
+  return <Constructor />;
 }
 
 export default App;
