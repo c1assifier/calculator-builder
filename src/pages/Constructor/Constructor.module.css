@@ -55,4 +55,25 @@
   padding: 20px;
   box-sizing: border-box;
   background-color: #fafafa;
+  transition: opacity 0.3s ease;
+}
+
+.panel.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .panel,
+  .canvas {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
 }
