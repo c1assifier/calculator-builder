@@ -1,4 +1,10 @@
+import { DndContext } from "@dnd-kit/core";
+import { DraggableBlock } from "@/app/dnd/DraggableBlock";
+import { DroppableCanvas } from "@/app/dnd/DroppableCanvas";
+import { useCalculatorStore } from "@/store/calculatorStore";
 import { useModeStore } from "@/store/modeStore";
+import { BLOCK_ORDER, type BlockType } from "@/types/block";
+import * as Blocks from "@/components/CalculatorBlocks";
 import styles from "./Constructor.module.css";
 import clsx from "clsx";
 import { AiOutlineEye } from "react-icons/ai";
@@ -6,6 +12,9 @@ import { FaCode } from "react-icons/fa";
 
 export const Constructor = () => {
   const { mode, setMode } = useModeStore();
+  const { canvasBlocks, addBlock } = useCalculatorStore();
+
+  const availableBlocks = BLOCK_ORDER.filter((b) => !canvasBlocks.includes(b));
 
   return (
     <div className={styles.container}>
@@ -24,10 +33,29 @@ export const Constructor = () => {
         </button>
       </div>
 
-      <div className={styles.grid}>
-        <div className={styles.panel}>{/* не забыть вставить блоки */}</div>
-        <div className={styles.canvas}>{/* основаня  рабочая область */}</div>
-      </div>
+      <DndContext
+        onDragEnd={({ over, active }) => {
+          if (over?.id === "canvas") {
+            addBlock(active.id as BlockType);
+          }
+        }}
+      >
+        <div className={styles.grid}>
+          <div className={styles.panel}>
+            {availableBlocks.map((type) => {
+              const Block = Blocks[type as keyof typeof Blocks];
+              return (
+                <DraggableBlock key={type} id={type}>
+                  <Block />
+                </DraggableBlock>
+              );
+            })}
+          </div>
+          <div className={styles.canvas}>
+            <DroppableCanvas />
+          </div>
+        </div>
+      </DndContext>
     </div>
   );
 };
